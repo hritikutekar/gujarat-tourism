@@ -39,9 +39,16 @@
         }
       </div>
 
-      <div class="form-group">
-        <label>Google Maps Link <span class="optional">optional</span></label>
-        <input type="url" formControlName="mapLink" placeholder="https://maps.google.com/..." />
+      <div class="form-row">
+        <div class="form-group">
+          <label>Booking Fee (₹) <span class="optional">optional — leave blank if free</span></label>
+          <input type="number" formControlName="price" placeholder="e.g. 50" min="0" />
+        </div>
+
+        <div class="form-group">
+          <label>Google Maps Link <span class="optional">optional</span></label>
+          <input type="url" formControlName="mapLink" placeholder="https://maps.google.com/..." />
+        </div>
       </div>
 
       <!-- Image Upload -->

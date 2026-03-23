@@ -10,6 +10,7 @@ export interface TouristPlace {
   description: string;
   images: string[];
   mapLink?: string;
+  price?: number | null;
   category: PlaceCategory;
   createdAt: string;
   updatedAt: string;

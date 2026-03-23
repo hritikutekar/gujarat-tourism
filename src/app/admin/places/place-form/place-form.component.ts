@@ -35,6 +35,7 @@ export class PlaceFormComponent implements OnInit {
       description: ['', [Validators.required, Validators.minLength(10)]],
       category: ['Other', Validators.required],
       mapLink: [''],
+      price: [null],
     });
   }
 
@@ -51,6 +52,7 @@ export class PlaceFormComponent implements OnInit {
             description: place.description,
             category: place.category,
             mapLink: place.mapLink ?? '',
+            price: place.price ?? null,
           });
           this.uploadedImageUrls = [...place.images];
           this.loading = false;
@@ -92,12 +94,13 @@ export class PlaceFormComponent implements OnInit {
       return;
     }
 
-    const { name, description, category, mapLink } = this.form.value;
+    const { name, description, category, mapLink, price } = this.form.value;
     const payload = {
       name,
       description,
       category,
       mapLink: mapLink?.trim() ?? '',
+      price: price !== '' && price !== null ? Number(price) : null,
       images: this.uploadedImageUrls,
     };
 
