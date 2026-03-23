@@ -268,6 +268,22 @@
     margin: 0 0 0.75rem;
   }
 
+  .sidebar-price {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 600;
+    font-style: italic;
+    color: var(--brown);
+    line-height: 1;
+  }
+
+  .sidebar-free {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--sienna);
+    letter-spacing: 0.03em;
+  }
+
   .sidebar-category {
     font-size: 0.85rem;
     font-weight: 500;
@@ -327,4 +343,275 @@
   .hero-meta { padding: 1rem 1.25rem; }
   .thumb-strip { padding: 0.5rem 1.25rem; }
   .content-wrap { padding: 2.5rem var(--page-margin) 4rem; }
+}
+
+/* ── Booking block ──────────────────────────────────── */
+/* Flows as a native sidebar section — no extra border */
+.booking-block {
+  padding: 1.5rem;
+  border-top: 1px solid var(--ivory-dark);
+
+  .booking-heading {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 600;
+    font-style: italic;
+    color: var(--brown);
+    margin: 0.35rem 0 1.25rem;
+    line-height: 1.1;
+  }
+}
+
+/* Success state */
+.booking-success {
+  text-align: center;
+  padding: 0.5rem 0 0.25rem;
+
+  .success-mark {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--ivory-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    color: var(--sienna);
+  }
+
+  .success-title {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 600;
+    font-style: italic;
+    color: var(--brown);
+    margin: 0 0 0.4rem;
+  }
+
+  .success-sub {
+    font-size: 0.82rem;
+    color: var(--stone);
+    margin: 0 0 1.25rem;
+    line-height: 1.6;
+    font-weight: 300;
+  }
+}
+
+.view-bookings-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--sienna);
+  text-decoration: none;
+  transition: color 0.2s;
+
+  svg { transition: transform 0.2s var(--ease-out); }
+
+  &:hover {
+    color: var(--sienna-dark);
+    svg { transform: translateX(3px); }
+  }
+}
+
+/* Guest/unauthenticated state */
+.booking-cta-text {
+  font-size: 0.85rem;
+  color: var(--stone);
+  margin: 0 0 1rem;
+  line-height: 1.6;
+  font-weight: 300;
+}
+
+.booking-signin-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.85rem 1rem;
+  background: var(--brown);
+  color: var(--ivory);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-align: center;
+  text-decoration: none;
+  box-sizing: border-box;
+  transition: background 0.2s;
+
+  svg { transition: transform 0.2s var(--ease-out); flex-shrink: 0; }
+
+  &:hover {
+    background: var(--sienna);
+    svg { transform: translateX(3px); }
+  }
+}
+
+.booking-register-link {
+  display: block;
+  text-align: center;
+  margin-top: 0.85rem;
+  font-size: 0.78rem;
+  color: var(--stone);
+  text-decoration: none;
+  transition: color 0.2s;
+
+  &:hover { color: var(--sienna); }
+}
+
+/* Error */
+.booking-error {
+  background: rgba(196, 87, 26, 0.06);
+  border-left: 2px solid var(--sienna);
+  color: var(--sienna-dark);
+  padding: 0.6rem 0.85rem;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  margin-bottom: 1rem;
+  font-size: 0.82rem;
+  font-family: var(--font-body);
+}
+
+/* Form fields */
+.bf-group {
+  margin-bottom: 1rem;
+
+  label {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--stone);
+    margin-bottom: 0.5rem;
+  }
+
+  .bf-optional {
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    text-transform: none;
+    color: rgba(122, 102, 82, 0.5);
+    font-size: 0.72rem;
+  }
+
+  input, textarea {
+    width: 100%;
+    padding: 0.7rem 0.9rem;
+    border: 1px solid var(--ivory-dark);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: var(--brown);
+    background: var(--ivory);
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    resize: vertical;
+
+    &::placeholder { color: rgba(122, 102, 82, 0.35); }
+
+    &:focus {
+      border-color: var(--sienna);
+      box-shadow: 0 0 0 3px rgba(196, 87, 26, 0.07);
+      background: var(--white);
+    }
+  }
+
+  .bf-error {
+    display: block;
+    font-size: 0.72rem;
+    color: var(--sienna);
+    margin-top: 0.3rem;
+    font-family: var(--font-body);
+  }
+}
+
+/* Guest count with inline suffix */
+.number-input-wrap {
+  position: relative;
+
+  input {
+    padding-right: 4rem;
+    appearance: textfield;
+
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button { -webkit-appearance: none; }
+  }
+
+  .number-suffix {
+    position: absolute;
+    right: 0.9rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.78rem;
+    color: var(--stone);
+    pointer-events: none;
+    font-family: var(--font-body);
+  }
+}
+
+/* Estimated total */
+.bf-total {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  background: var(--ivory-dark);
+  border-radius: var(--radius-sm);
+  padding: 0.85rem 1rem;
+  margin-bottom: 1rem;
+
+  .bf-total-label {
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--stone);
+  }
+
+  .bf-total-amount {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 600;
+    font-style: italic;
+    color: var(--brown);
+    line-height: 1;
+  }
+}
+
+/* Submit button */
+.bf-submit {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.9rem 1rem;
+  background: var(--brown);
+  color: var(--ivory);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+
+  svg { transition: transform 0.2s var(--ease-out); flex-shrink: 0; }
+
+  &:hover:not(:disabled) {
+    background: var(--sienna);
+    svg { transform: translateX(3px); }
+  }
+
+  &:active:not(:disabled) { transform: scale(0.99); }
+
+  &:disabled { opacity: 0.5; cursor: not-allowed; }
 }

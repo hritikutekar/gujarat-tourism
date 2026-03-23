@@ -22,6 +22,41 @@
           <span class="stat-label">Categories</span>
         </div>
       </div>
+      <div class="stat-card bookings-total">
+        <i-feather name="calendar" class="stat-icon"></i-feather>
+        <div class="stat-info">
+          <span class="stat-number">{{ bookingStats.total }}</span>
+          <span class="stat-label">Total Bookings</span>
+        </div>
+      </div>
+      <div class="stat-card bookings-pending">
+        <i-feather name="clock" class="stat-icon"></i-feather>
+        <div class="stat-info">
+          <span class="stat-number">{{ bookingStats.pending }}</span>
+          <span class="stat-label">Pending</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <h2>Booking Overview</h2>
+        <a routerLink="/admin/bookings" class="view-all">Manage bookings →</a>
+      </div>
+      <div class="booking-overview">
+        <div class="booking-stat confirmed">
+          <span class="bs-num">{{ bookingStats.confirmed }}</span>
+          <span class="bs-label">Confirmed</span>
+        </div>
+        <div class="booking-stat pending">
+          <span class="bs-num">{{ bookingStats.pending }}</span>
+          <span class="bs-label">Pending</span>
+        </div>
+        <div class="booking-stat cancelled">
+          <span class="bs-num">{{ bookingStats.cancelled }}</span>
+          <span class="bs-label">Cancelled</span>
+        </div>
+      </div>
     </div>
 
     @if (categoryCounts.length > 0) {

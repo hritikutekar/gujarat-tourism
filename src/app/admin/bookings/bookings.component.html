@@ -1,0 +1,103 @@
+<div class="bookings-page">
+  <div class="page-header">
+    <h1>Bookings</h1>
+    <div class="filter-tabs">
+      @for (f of filters; track f) {
+        <button
+          class="filter-tab"
+          [class.active]="activeFilter === f"
+          (click)="setFilter(f)"
+        >{{ f | titlecase }}</button>
+      }
+    </div>
+  </div>
+
+  @if (loading) {
+    <div class="loading">Loading bookings...</div>
+  } @else if (bookings.length === 0) {
+    <div class="empty">No bookings found.</div>
+  } @else {
+    <div class="table-wrap">
+      <table class="bookings-table">
+        <thead>
+          <tr>
+            <th>Customer</th>
+            <th>Place</th>
+            <th>Travel Date</th>
+            <th>People</th>
+            <th>Amount</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (booking of bookings; track booking._id) {
+            <tr>
+              <td>
+                <div class="customer-cell">
+                  <span class="customer-name">{{ getCustomer(booking).name }}</span>
+                  <span class="customer-email">{{ getCustomer(booking).email }}</span>
+                  @if (getCustomer(booking).phone) {
+                    <span class="customer-phone">{{ getCustomer(booking).phone }}</span>
+                  }
+                </div>
+              </td>
+              <td>
+                <div class="place-cell">
+                  <span class="place-name">{{ getPlace(booking).name }}</span>
+                  <span class="place-cat">{{ getPlace(booking).category }}</span>
+                </div>
+              </td>
+              <td>{{ booking.travelDate | date:'mediumDate' }}</td>
+              <td class="center">{{ booking.numberOfPeople }}</td>
+              <td>
+                @if (booking.totalAmount != null) {
+                  {{ booking.totalAmount | currency:'INR':'symbol':'1.0-0' }}
+                } @else {
+                  <span class="free-tag">Free</span>
+                }
+              </td>
+              <td>
+                <span class="status-badge" [class]="getStatusClass(booking.status)">
+                  {{ booking.status | titlecase }}
+                </span>
+              </td>
+              <td>
+                <div class="action-btns">
+                  @if (booking.status !== 'confirmed') {
+                    <button
+                      class="action-btn confirm"
+                      [disabled]="updatingId === booking._id"
+                      (click)="updateStatus(booking, 'confirmed')"
+                    >Confirm</button>
+                  }
+                  @if (booking.status !== 'cancelled') {
+                    <button
+                      class="action-btn cancel"
+                      [disabled]="updatingId === booking._id"
+                      (click)="updateStatus(booking, 'cancelled')"
+                    >Cancel</button>
+                  }
+                  @if (booking.status === 'confirmed' || booking.status === 'cancelled') {
+                    <button
+                      class="action-btn pending"
+                      [disabled]="updatingId === booking._id"
+                      (click)="updateStatus(booking, 'pending')"
+                    >Reset</button>
+                  }
+                </div>
+              </td>
+            </tr>
+            @if (booking.notes) {
+              <tr class="notes-row">
+                <td colspan="7">
+                  <span class="notes-label">Notes:</span> {{ booking.notes }}
+                </td>
+              </tr>
+            }
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

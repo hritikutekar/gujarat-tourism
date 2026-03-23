@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { authGuard } from './core/guards/auth.guard';
+import { customerAuthGuard } from './core/guards/customer-auth.guard';
 
 export const routes: Routes = [
   {
@@ -13,6 +14,19 @@ export const routes: Routes = [
   {
     path: 'places/:id',
     loadComponent: () => import('./customer/place-detail/place-detail.component').then(m => m.PlaceDetailComponent),
+  },
+  {
+    path: 'login',
+    loadComponent: () => import('./customer/login/login.component').then(m => m.CustomerLoginComponent),
+  },
+  {
+    path: 'register',
+    loadComponent: () => import('./customer/register/register.component').then(m => m.CustomerRegisterComponent),
+  },
+  {
+    path: 'my-bookings',
+    canActivate: [customerAuthGuard],
+    loadComponent: () => import('./customer/my-bookings/my-bookings.component').then(m => m.MyBookingsComponent),
   },
   {
     path: 'admin/login',
@@ -38,6 +52,10 @@ export const routes: Routes = [
       {
         path: 'places/:id/edit',
         loadComponent: () => import('./admin/places/place-form/place-form.component').then(m => m.PlaceFormComponent),
+      },
+      {
+        path: 'bookings',
+        loadComponent: () => import('./admin/bookings/bookings.component').then(m => m.AdminBookingsComponent),
       },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     ],

@@ -72,8 +72,85 @@
               </div>
             }
             <div class="sidebar-block">
+              <p class="sidebar-label">Booking Fee</p>
+              @if (place.price != null) {
+                <span class="sidebar-price">₹{{ place.price }} per person</span>
+              } @else {
+                <span class="sidebar-free">Free entry</span>
+              }
+            </div>
+            <div class="sidebar-block">
               <p class="sidebar-label">Category</p>
               <span class="sidebar-category">{{ place.category }}</span>
+            </div>
+
+            <!-- Booking Form -->
+            <div class="booking-block">
+              <p class="sidebar-label">Reserve Your Visit</p>
+              <h3 class="booking-heading">Book This Place</h3>
+
+              @if (bookingSuccess) {
+                <div class="booking-success">
+                  <div class="success-mark">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 6L9 17l-5-5"/></svg>
+                  </div>
+                  <p class="success-title">You're all set!</p>
+                  <p class="success-sub">Booking submitted — we'll confirm it shortly.</p>
+                  <a routerLink="/my-bookings" class="view-bookings-link">
+                    View My Bookings
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                  </a>
+                </div>
+              } @else if (!isCustomerLoggedIn) {
+                <p class="booking-cta-text">Sign in to reserve your visit to this destination.</p>
+                <a routerLink="/login" class="booking-signin-btn">
+                  Sign In to Book
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+                <a routerLink="/register" class="booking-register-link">Create a free account →</a>
+              } @else {
+                @if (bookingError) {
+                  <div class="booking-error">{{ bookingError }}</div>
+                }
+                <form [formGroup]="bookingForm" (ngSubmit)="submitBooking()">
+                  <div class="bf-group">
+                    <label>Travel Date</label>
+                    <input type="date" formControlName="travelDate" [min]="today" />
+                    @if (bookingForm.get('travelDate')?.invalid && bookingForm.get('travelDate')?.touched) {
+                      <span class="bf-error">Please select a date</span>
+                    }
+                  </div>
+                  <div class="bf-group">
+                    <label>Guests</label>
+                    <div class="number-input-wrap">
+                      <input type="number" formControlName="numberOfPeople" min="1" max="50" />
+                      <span class="number-suffix">person{{ bookingForm.get('numberOfPeople')?.value === 1 ? '' : 's' }}</span>
+                    </div>
+                    @if (bookingForm.get('numberOfPeople')?.invalid && bookingForm.get('numberOfPeople')?.touched) {
+                      <span class="bf-error">Between 1 and 50</span>
+                    }
+                  </div>
+                  <div class="bf-group">
+                    <label>
+                      Special Requests
+                      <span class="bf-optional">optional</span>
+                    </label>
+                    <textarea formControlName="notes" rows="2" placeholder="Dietary needs, accessibility, etc."></textarea>
+                  </div>
+                  @if (estimatedTotal != null) {
+                    <div class="bf-total">
+                      <span class="bf-total-label">Estimated total</span>
+                      <span class="bf-total-amount">{{ estimatedTotal | currency:'INR':'symbol':'1.0-0' }}</span>
+                    </div>
+                  }
+                  <button type="submit" class="bf-submit" [disabled]="bookingLoading">
+                    <span>@if (bookingLoading) { Booking… } @else { Book Now }</span>
+                    @if (!bookingLoading) {
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    }
+                  </button>
+                </form>
+              }
             </div>
           </aside>
         </div>

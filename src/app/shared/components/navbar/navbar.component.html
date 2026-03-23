@@ -7,5 +7,14 @@
   <ul class="navbar-links">
     <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a></li>
     <li><a routerLink="/places" routerLinkActive="active">Explore</a></li>
+    @if (isCustomerLoggedIn) {
+      <li><a routerLink="/my-bookings" routerLinkActive="active">My Bookings</a></li>
+      <li class="user-menu">
+        <span class="user-name">{{ customerName }}</span>
+        <button class="nav-logout-btn" (click)="logout()">Sign Out</button>
+      </li>
+    } @else {
+      <li><a routerLink="/login" routerLinkActive="active" class="nav-login-btn">Sign In</a></li>
+    }
   </ul>
 </nav>

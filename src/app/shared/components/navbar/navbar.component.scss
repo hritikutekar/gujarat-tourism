@@ -61,6 +61,49 @@
   }
 }
 
+.user-menu {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+
+  .user-name {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--brown);
+    text-transform: none;
+    letter-spacing: 0;
+  }
+}
+
+.nav-logout-btn {
+  background: transparent;
+  border: 1px solid var(--ivory-dark);
+  color: var(--stone);
+  padding: 0.3rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  transition: all 0.2s;
+
+  &:hover {
+    border-color: var(--sienna);
+    color: var(--sienna);
+  }
+}
+
+.nav-login-btn {
+  background: var(--sienna) !important;
+  color: #fff !important;
+  padding: 0.4rem 1rem !important;
+  border-radius: 6px !important;
+
+  &::after { display: none !important; }
+  &:hover { background: #9a3b1f !important; color: #fff !important; }
+}
+
 @media (max-width: 600px) {
   .navbar {
     padding: 0 var(--page-margin);

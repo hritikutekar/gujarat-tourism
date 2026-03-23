@@ -1,0 +1,321 @@
+/* Register uses the same split-screen layout as login.
+   All structural styles are duplicated here so each file
+   is self-contained (no shared stylesheet needed). */
+
+/* ── Auth Shell ─────────────────────────────────────────── */
+.auth-shell {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+
+  @media (max-width: 860px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Brand Panel ────────────────────────────────────────── */
+.brand-panel {
+  position: relative;
+  background: var(--brown);
+  color: var(--ivory);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 2.5rem var(--page-margin);
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 55% at 90% 20%, rgba(212, 168, 83, 0.3) 0%, transparent 60%),
+      radial-gradient(ellipse 70% 60% at 15% 80%, rgba(196, 87, 26, 0.38) 0%, transparent 65%),
+      radial-gradient(ellipse 40% 30% at 55% 10%, rgba(196, 87, 26, 0.06) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  &::after { z-index: 1; }
+
+  > * { position: relative; z-index: 2; }
+
+  @media (max-width: 860px) {
+    display: none;
+  }
+}
+
+.brand-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(250, 247, 242, 0.45);
+  text-decoration: none;
+  transition: color 0.2s;
+
+  svg { transition: transform 0.2s var(--ease-out); }
+
+  &:hover {
+    color: var(--ivory);
+    svg { transform: translateX(-3px); }
+  }
+}
+
+.brand-content {
+  margin-top: auto;
+  padding-bottom: 2rem;
+  animation: fadeUp 0.9s var(--ease-out) 0.1s both;
+}
+
+.brand-eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 0 0 1.5rem;
+}
+
+.brand-heading {
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 4.5vw, 4rem);
+  font-weight: 600;
+  line-height: 1.05;
+  color: var(--ivory);
+  margin: 0 0 1.5rem;
+
+  em {
+    font-style: italic;
+    color: var(--gold);
+  }
+}
+
+.brand-tagline {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  line-height: 1.75;
+  color: rgba(250, 247, 242, 0.5);
+  max-width: 340px;
+  margin: 0;
+  font-weight: 300;
+}
+
+.brand-decoration {
+  position: absolute;
+  bottom: -0.5rem;
+  right: -1rem;
+  pointer-events: none;
+  user-select: none;
+
+  .deco-word {
+    font-family: var(--font-display);
+    font-size: clamp(6rem, 12vw, 11rem);
+    font-weight: 600;
+    font-style: italic;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(250, 247, 242, 0.06);
+    line-height: 1;
+    white-space: nowrap;
+    display: block;
+  }
+}
+
+.brand-footer {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid rgba(250, 247, 242, 0.1);
+  margin-top: 2.5rem;
+  animation: fadeUp 0.9s var(--ease-out) 0.25s both;
+}
+
+.brand-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+
+  .bs-num {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .bs-label {
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(250, 247, 242, 0.4);
+  }
+}
+
+.brand-divider {
+  width: 1px;
+  height: 2.5rem;
+  background: rgba(250, 247, 242, 0.15);
+}
+
+/* ── Form Panel ─────────────────────────────────────────── */
+.form-panel {
+  background: var(--ivory);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2rem;
+  animation: fadeUp 0.8s var(--ease-out) 0.15s both;
+}
+
+.form-inner {
+  width: 100%;
+  max-width: 400px;
+}
+
+.form-header {
+  margin-bottom: 2.5rem;
+}
+
+.form-title {
+  font-family: var(--font-display);
+  font-size: 2.8rem;
+  font-weight: 600;
+  color: var(--brown);
+  margin: 0 0 0.4rem;
+  line-height: 1.1;
+}
+
+.form-subtitle {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--stone);
+  margin: 0;
+  font-weight: 300;
+}
+
+/* ── Alert ──────────────────────────────────────────────── */
+.form-alert {
+  background: #fdf0f0;
+  border-left: 3px solid var(--sienna);
+  color: var(--sienna-dark);
+  padding: 0.75rem 1rem;
+  border-radius: 0 6px 6px 0;
+  margin-bottom: 1.5rem;
+  font-size: 0.875rem;
+  font-family: var(--font-body);
+}
+
+/* ── Fields ─────────────────────────────────────────────── */
+.field {
+  margin-bottom: 1.25rem;
+
+  label {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--stone);
+    margin-bottom: 0.5rem;
+  }
+
+  .label-optional {
+    font-weight: 300;
+    letter-spacing: 0;
+    text-transform: none;
+    color: rgba(122, 102, 82, 0.5);
+    font-size: 0.75rem;
+  }
+
+  input {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    border: 1.5px solid var(--ivory-dark);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--brown);
+    background: var(--white);
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 0.2s, box-shadow 0.2s;
+
+    &::placeholder { color: rgba(122, 102, 82, 0.4); }
+
+    &:focus {
+      border-color: var(--sienna);
+      box-shadow: 0 0 0 3px rgba(196, 87, 26, 0.08);
+    }
+  }
+
+  .field-error {
+    display: block;
+    font-size: 0.78rem;
+    color: var(--sienna);
+    margin-top: 0.35rem;
+    font-family: var(--font-body);
+  }
+}
+
+/* ── Submit button ──────────────────────────────────────── */
+.submit-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.95rem 1.5rem;
+  background: var(--brown);
+  color: var(--ivory);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: background 0.2s, transform 0.15s;
+
+  .btn-arrow {
+    transition: transform 0.2s var(--ease-out);
+    flex-shrink: 0;
+  }
+
+  &:hover:not(:disabled) {
+    background: var(--sienna);
+    .btn-arrow { transform: translateX(4px); }
+  }
+
+  &:active:not(:disabled) { transform: scale(0.99); }
+
+  &:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+}
+
+/* ── Switch link ────────────────────────────────────────── */
+.switch-text {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  color: var(--stone);
+  margin: 1.5rem 0 0;
+  text-align: center;
+}
+
+.switch-link {
+  color: var(--sienna);
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s;
+
+  &:hover { color: var(--sienna-dark); text-decoration: underline; }
+}

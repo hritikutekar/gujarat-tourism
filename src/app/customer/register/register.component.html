@@ -1,0 +1,103 @@
+<div class="auth-shell">
+
+  <!-- Left panel — atmospheric brand side -->
+  <div class="brand-panel grain">
+    <a routerLink="/" class="brand-back">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Back to site
+    </a>
+
+    <div class="brand-content">
+      <p class="brand-eyebrow">Gujarat Tourism</p>
+      <h1 class="brand-heading">
+        Your adventure<br />
+        in <em>Gujarat</em><br />
+        starts here
+      </h1>
+      <p class="brand-tagline">Create your account and start exploring curated destinations — salt deserts, ancient temples, coastal villages and more.</p>
+    </div>
+
+    <div class="brand-decoration" aria-hidden="true">
+      <span class="deco-word">Explore</span>
+    </div>
+
+    <div class="brand-footer">
+      <div class="brand-stat">
+        <span class="bs-num">6+</span>
+        <span class="bs-label">Categories</span>
+      </div>
+      <div class="brand-divider"></div>
+      <div class="brand-stat">
+        <span class="bs-num">Free</span>
+        <span class="bs-label">To Join</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right panel — form -->
+  <div class="form-panel">
+    <div class="form-inner">
+      <div class="form-header">
+        <h2 class="form-title">Create account</h2>
+        <p class="form-subtitle">Join thousands exploring Gujarat</p>
+      </div>
+
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        @if (errorMessage) {
+          <div class="form-alert">{{ errorMessage }}</div>
+        }
+
+        <div class="field">
+          <label for="name">Full name</label>
+          <input id="name" type="text" formControlName="name"
+            placeholder="Your name" autocomplete="name" />
+          @if (form.get('name')?.invalid && form.get('name')?.touched) {
+            <span class="field-error">At least 2 characters</span>
+          }
+        </div>
+
+        <div class="field">
+          <label for="email">Email address</label>
+          <input id="email" type="email" formControlName="email"
+            placeholder="you@example.com" autocomplete="email" />
+          @if (form.get('email')?.invalid && form.get('email')?.touched) {
+            <span class="field-error">Enter a valid email</span>
+          }
+        </div>
+
+        <div class="field">
+          <label for="phone">
+            Phone
+            <span class="label-optional">— optional</span>
+          </label>
+          <input id="phone" type="tel" formControlName="phone"
+            placeholder="+91 98765 43210" autocomplete="tel" />
+        </div>
+
+        <div class="field">
+          <label for="password">Password</label>
+          <input id="password" type="password" formControlName="password"
+            placeholder="Min. 6 characters" autocomplete="new-password" />
+          @if (form.get('password')?.invalid && form.get('password')?.touched) {
+            <span class="field-error">Minimum 6 characters</span>
+          }
+        </div>
+
+        <button type="submit" class="submit-btn" [disabled]="loading">
+          <span class="btn-label">
+            @if (loading) { Creating account… } @else { Create Account }
+          </span>
+          @if (!loading) {
+            <svg class="btn-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          }
+        </button>
+      </form>
+
+      <p class="switch-text">
+        Already have an account?
+        <a routerLink="/login" class="switch-link">Sign in</a>
+      </p>
+    </div>
+  </div>
+
+</div>

@@ -139,3 +139,39 @@
 }
 
 .loading { padding: 2rem; color: #888; }
+
+.stat-card.bookings-total { --accent: #8e44ad; }
+.stat-card.bookings-pending { --accent: #e67e22; }
+
+.booking-overview {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.booking-stat {
+  flex: 1;
+  min-width: 120px;
+  padding: 1rem 1.25rem;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+
+  .bs-num {
+    font-size: 2rem;
+    font-weight: 800;
+  }
+
+  .bs-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  &.confirmed { background: #d1f2eb; .bs-num { color: #1a6b49; } .bs-label { color: #1a6b49; } }
+  &.pending   { background: #fff3cd; .bs-num { color: #856404; } .bs-label { color: #856404; } }
+  &.cancelled { background: #fde8e8; .bs-num { color: #9b1c1c; } .bs-label { color: #9b1c1c; } }
+}
