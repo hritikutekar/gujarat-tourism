@@ -1,0 +1,55 @@
+<div class="admin-places">
+  <div class="page-header">
+    <h1>Manage Places</h1>
+    <a routerLink="/admin/places/new" class="btn-primary">+ Add New Place</a>
+  </div>
+
+  @if (loading) {
+    <div class="loading">Loading places...</div>
+  } @else if (places.length === 0) {
+    <div class="empty-state">
+      <div class="empty-icon">📍</div>
+      <h3>No places added yet</h3>
+      <a routerLink="/admin/places/new" class="btn-primary">Add Your First Place</a>
+    </div>
+  } @else {
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Images</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (place of places; track place._id) {
+            <tr>
+              <td class="thumb-cell">
+                <img [src]="getThumbnail(place)" [alt]="place.name" class="thumb" />
+              </td>
+              <td>
+                <strong>{{ place.name }}</strong>
+                <p class="place-desc">{{ place.description | slice:0:60 }}...</p>
+              </td>
+              <td><span class="badge">{{ place.category }}</span></td>
+              <td>{{ place.images.length }}</td>
+              <td class="actions-cell">
+                <a [routerLink]="['/admin/places', place._id, 'edit']" class="btn-edit">Edit</a>
+                <button
+                  class="btn-delete"
+                  (click)="confirmDelete(place)"
+                  [disabled]="deletingId === place._id"
+                >
+                  {{ deletingId === place._id ? '...' : 'Delete' }}
+                </button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

@@ -1,0 +1,87 @@
+<div class="page-shell">
+<app-navbar />
+
+<!-- Hero -->
+<section class="hero grain">
+  <div class="hero-inner">
+
+    <div class="hero-text">
+      <p class="hero-eyebrow">Discover India's Jewel State</p>
+      <h1 class="hero-title">
+        The Soul<br />
+        of <em>Gujarat</em><br />
+        Awaits You
+      </h1>
+      <p class="hero-sub">Salt deserts, ancient temples, wildlife sanctuaries, and living traditions — all in one extraordinary state.</p>
+      <div class="search-bar">
+        <input
+          type="text"
+          [(ngModel)]="searchQuery"
+          placeholder="Where in Gujarat?"
+          (keydown.enter)="onSearch()"
+        />
+        <button (click)="onSearch()">Search</button>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hero-wordmark" aria-hidden="true">Gujarat</div>
+      <div class="hero-stat">
+        <span class="stat-number">{{ featuredPlaces.length || '∞' }}</span>
+        <span class="stat-label">Curated<br/>Destinations</span>
+      </div>
+      <div class="hero-divider"></div>
+      <p class="hero-tagline">Explore the land of<br/>vibrant cultures &amp; landscapes</p>
+    </div>
+
+  </div>
+  <div class="hero-scroll-hint">Scroll to explore <i-feather name="chevron-down" class="scroll-chevron"></i-feather></div>
+</section>
+
+<!-- Featured -->
+<section class="featured">
+  <div class="featured-inner">
+    <div class="section-label">Handpicked for You</div>
+    <div class="section-header">
+      <h2>Featured Destinations</h2>
+      <a routerLink="/places" class="view-all">Explore all →</a>
+    </div>
+
+    @if (loading) {
+      <div class="places-grid">
+        @for (i of [1,2,3,4,5,6]; track i) {
+          <div class="skeleton-card"></div>
+        }
+      </div>
+    } @else if (featuredPlaces.length === 0) {
+      <div class="empty-state">
+        <p>No destinations added yet.</p>
+      </div>
+    } @else {
+      <div class="places-grid">
+        @for (place of featuredPlaces; track place._id) {
+          <app-place-card [place]="place" />
+        }
+      </div>
+    }
+  </div>
+</section>
+
+<!-- Categories -->
+<section class="categories">
+  <div class="categories-inner">
+    <div class="section-label">Browse by Type</div>
+    <h2>What Are You Looking For?</h2>
+    <div class="category-grid">
+      @for (cat of categories; track cat.name) {
+        <a [routerLink]="['/places']" [queryParams]="{ category: cat.name }" class="cat-card">
+          <span class="cat-icon">{{ cat.icon }}</span>
+          <span class="cat-name">{{ cat.name }}</span>
+        </a>
+      }
+    </div>
+  </div>
+</section>
+
+<app-footer />
+</div>

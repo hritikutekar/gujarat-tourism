@@ -1,0 +1,118 @@
+.admin-places {
+  padding: 2rem;
+}
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+
+  h1 { font-size: 1.75rem; font-weight: 800; margin: 0; }
+}
+
+.btn-primary {
+  background: #e67e22;
+  color: #fff;
+  padding: 0.6rem 1.25rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+  &:hover { background: #d35400; }
+}
+
+.loading { padding: 2rem; color: #888; }
+
+.empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  .empty-icon { font-size: 4rem; margin-bottom: 1rem; }
+  h3 { margin-bottom: 1.5rem; color: #555; }
+}
+
+.table-wrap {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  overflow: hidden;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+
+  thead {
+    background: #f8f9fa;
+    th {
+      text-align: left;
+      padding: 1rem;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #888;
+      font-weight: 600;
+    }
+  }
+
+  tbody tr {
+    border-top: 1px solid #f0f0f0;
+    transition: background 0.1s;
+    &:hover { background: #fafafa; }
+  }
+
+  td {
+    padding: 0.85rem 1rem;
+    vertical-align: middle;
+  }
+
+  .thumb-cell .thumb {
+    width: 60px;
+    height: 45px;
+    object-fit: cover;
+    border-radius: 6px;
+  }
+
+  .place-desc { font-size: 0.8rem; color: #888; margin: 0.25rem 0 0; }
+
+  .badge {
+    background: #fff3e0;
+    color: #e67e22;
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  .actions-cell {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+}
+
+.btn-edit {
+  padding: 0.4rem 0.9rem;
+  background: #ebf5fb;
+  color: #2980b9;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: background 0.2s;
+  &:hover { background: #d6eaf8; }
+}
+
+.btn-delete {
+  padding: 0.4rem 0.9rem;
+  background: #fdf0f0;
+  color: #c0392b;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  &:hover:not(:disabled) { background: #fadbd8; }
+  &:disabled { opacity: 0.5; cursor: not-allowed; }
+}

@@ -1,0 +1,67 @@
+<div class="dashboard">
+  <div class="page-header">
+    <h1>Dashboard</h1>
+    <a routerLink="/admin/places/new" class="btn-primary"><i-feather name="plus" class="btn-icon"></i-feather> Add New Place</a>
+  </div>
+
+  @if (loading) {
+    <div class="loading">Loading stats...</div>
+  } @else {
+    <div class="stats-grid">
+      <div class="stat-card total">
+        <i-feather name="map-pin" class="stat-icon"></i-feather>
+        <div class="stat-info">
+          <span class="stat-number">{{ totalPlaces }}</span>
+          <span class="stat-label">Total Places</span>
+        </div>
+      </div>
+      <div class="stat-card categories">
+        <i-feather name="layers" class="stat-icon"></i-feather>
+        <div class="stat-info">
+          <span class="stat-number">{{ categoryCounts.length }}</span>
+          <span class="stat-label">Categories</span>
+        </div>
+      </div>
+    </div>
+
+    @if (categoryCounts.length > 0) {
+      <div class="section">
+        <h2>Places by Category</h2>
+        <div class="category-list">
+          @for (cat of categoryCounts; track cat.name) {
+            <div class="category-item">
+              <span class="cat-name">{{ cat.name }}</span>
+              <div class="bar-wrap">
+                <div class="bar" [style.width.%]="(cat.count / totalPlaces) * 100"></div>
+              </div>
+              <span class="cat-count">{{ cat.count }}</span>
+            </div>
+          }
+        </div>
+      </div>
+    }
+
+    <div class="section">
+      <div class="section-header">
+        <h2>Recent Places</h2>
+        <a routerLink="/admin/places" class="view-all">View all →</a>
+      </div>
+      @if (recentPlaces.length === 0) {
+        <div class="empty">No places yet. <a routerLink="/admin/places/new">Add your first place →</a></div>
+      } @else {
+        <div class="recent-list">
+          @for (place of recentPlaces; track place._id) {
+            <div class="recent-item">
+              <img [src]="place.images[0] || 'assets/placeholder.jpg'" [alt]="place.name" />
+              <div class="recent-info">
+                <span class="recent-name">{{ place.name }}</span>
+                <span class="recent-cat">{{ place.category }}</span>
+              </div>
+              <a [routerLink]="['/admin/places', place._id, 'edit']" class="edit-link">Edit</a>
+            </div>
+          }
+        </div>
+      }
+    </div>
+  }
+</div>

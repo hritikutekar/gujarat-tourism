@@ -1,0 +1,11 @@
+<a class="card" [routerLink]="['/places', place._id]">
+  <div class="card-image">
+    <img [src]="thumbnail" [alt]="place.name" loading="lazy" />
+    <span class="category-badge">{{ place.category }}</span>
+  </div>
+  <div class="card-body">
+    <h3 class="card-title">{{ place.name }}</h3>
+    <p class="card-description">{{ place.description | slice:0:90 }}{{ place.description.length > 90 ? '…' : '' }}</p>
+    <i-feather name="arrow-right" class="card-arrow"></i-feather>
+  </div>
+</a>

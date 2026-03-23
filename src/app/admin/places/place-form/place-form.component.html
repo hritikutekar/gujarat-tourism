@@ -1,0 +1,82 @@
+<div class="place-form-page">
+  <div class="page-header">
+    <a routerLink="/admin/places" class="back-link">← Back</a>
+    <h1>{{ isEdit ? 'Edit Place' : 'Add New Place' }}</h1>
+  </div>
+
+  @if (loading) {
+    <div class="loading">Loading...</div>
+  } @else {
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-card">
+      @if (errorMessage) {
+        <div class="error-alert">{{ errorMessage }}</div>
+      }
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Name *</label>
+          <input type="text" formControlName="name" placeholder="e.g. Rann of Kutch" />
+          @if (form.get('name')?.invalid && form.get('name')?.touched) {
+            <span class="field-error">Name is required (min 2 chars)</span>
+          }
+        </div>
+
+        <div class="form-group">
+          <label>Category *</label>
+          <select formControlName="category">
+            @for (cat of categories; track cat) {
+              <option [value]="cat">{{ cat }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Description *</label>
+        <textarea formControlName="description" rows="4" placeholder="Describe this destination..."></textarea>
+        @if (form.get('description')?.invalid && form.get('description')?.touched) {
+          <span class="field-error">Description is required (min 10 chars)</span>
+        }
+      </div>
+
+      <div class="form-group">
+        <label>Google Maps Link <span class="optional">optional</span></label>
+        <input type="url" formControlName="mapLink" placeholder="https://maps.google.com/..." />
+      </div>
+
+      <!-- Image Upload -->
+      <div class="form-group">
+        <label>Images</label>
+        <div class="upload-area" [class.uploading]="uploadingImages">
+          <input type="file" id="images" multiple accept="image/jpeg,image/png,image/webp" (change)="onFilesSelected($event)" [disabled]="uploadingImages" />
+          <label for="images" class="upload-label">
+            @if (uploadingImages) {
+              <i-feather name="loader" class="upload-icon spinning"></i-feather>
+            } @else {
+              <i-feather name="upload-cloud" class="upload-icon"></i-feather>
+            }
+            <span>{{ uploadingImages ? 'Uploading...' : 'Click to choose images (auto-uploads on select)' }}</span>
+          </label>
+        </div>
+
+        @if (uploadedImageUrls.length > 0) {
+          <div class="image-previews">
+            @for (url of uploadedImageUrls; track $index) {
+              <div class="preview-item">
+                <img [src]="url" alt="preview" />
+                <button type="button" class="remove-img" (click)="removeImage($index)"><i-feather name="x" class="remove-icon"></i-feather></button>
+              </div>
+            }
+          </div>
+        }
+      </div>
+
+      <div class="form-actions">
+        <a routerLink="/admin/places" class="btn-cancel">Cancel</a>
+        <button type="submit" class="btn-save" [disabled]="saving">
+          {{ saving ? 'Saving...' : (isEdit ? 'Update Place' : 'Add Place') }}
+        </button>
+      </div>
+    </form>
+  }
+</div>

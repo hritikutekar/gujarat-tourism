@@ -1,0 +1,99 @@
+/* ── Design Tokens ────────────────────────────────────────── */
+:root {
+  --ivory:       #FAF7F2;
+  --ivory-dark:  #EDE8DF;
+  --brown:       #1C1511;
+  --brown-mid:   #4A3728;
+  --stone:       #7A6652;
+  --sienna:      #C4571A;
+  --sienna-dark: #A3450F;
+  --gold:        #D4A853;
+  --white:       #FFFFFF;
+
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body:    'DM Sans', sans-serif;
+
+  --radius-sm:  6px;
+  --radius-md:  12px;
+  --radius-lg:  20px;
+
+  --shadow-card: 0 2px 20px rgba(28, 21, 17, 0.08);
+  --shadow-hover: 0 12px 40px rgba(28, 21, 17, 0.16);
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --page-margin: clamp(1.5rem, 6vw, 5rem);
+}
+
+/* ── Reset ───────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--brown);
+  background: var(--ivory);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  height: 100%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  line-height: 1.15;
+  font-family: var(--font-display);
+  font-weight: 600;
+}
+
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+button { font-family: var(--font-body); }
+
+/* ── Page shell (sticky footer) ─────────────────────────── */
+.page-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  app-footer { margin-top: auto; }
+}
+
+/* ── Grain texture overlay ──────────────────────────────── */
+.grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  opacity: 0.35;
+}
+
+/* ── Shimmer skeleton ───────────────────────────────────── */
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Feather icon baseline ──────────────────────────────── */
+i-feather svg {
+  display: block;
+  stroke-width: 1.5px;
+}
+
+.spinning i-feather svg {
+  animation: spin 1s linear infinite;
+}

@@ -1,0 +1,81 @@
+.admin-shell {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 240px;
+  background: #1a3c5e;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+
+  .sidebar-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1.5rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+
+    .logo { font-size: 1.5rem; }
+  }
+
+  .sidebar-nav {
+    flex: 1;
+    padding: 1rem 0;
+
+    a {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.85rem 1.5rem;
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: all 0.2s;
+
+      &:hover { background: rgba(255,255,255,0.08); color: #fff; }
+      &.active { background: rgba(230, 126, 34, 0.25); color: #e67e22; }
+      &.external-link { margin-top: auto; }
+
+      .nav-icon { font-size: 1.1rem; }
+    }
+  }
+
+  .sidebar-footer {
+    padding: 1.25rem 1.5rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .username {
+      font-size: 0.85rem;
+      opacity: 0.8;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    button {
+      background: rgba(255,255,255,0.1);
+      border: none;
+      color: #fff;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      transition: background 0.2s;
+
+      &:hover { background: rgba(255,255,255,0.2); }
+    }
+  }
+}
+
+.admin-main {
+  flex: 1;
+  background: #f4f6f9;
+  overflow: auto;
+}

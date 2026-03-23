@@ -1,0 +1,86 @@
+<div class="page-shell">
+  <app-navbar />
+
+  @if (loading) {
+    <div class="loading-state">
+      <div class="loader-ring"></div>
+    </div>
+  } @else if (error || !place) {
+    <div class="error-state">
+      <p class="error-eyebrow">404</p>
+      <h2>Destination not found</h2>
+      <a routerLink="/places" class="back-link">← Back to Explore</a>
+    </div>
+  } @else {
+    <article class="detail-page">
+
+      <!-- Hero image strip -->
+      <div class="hero-strip">
+        <img [src]="activeImage" [alt]="place.name" class="hero-img" />
+        <div class="hero-overlay"></div>
+
+        <div class="hero-meta">
+          <a routerLink="/places" class="breadcrumb-link"><i-feather name="arrow-left" class="nav-icon"></i-feather> All Destinations</a>
+          <span class="hero-category">{{ place.category }}</span>
+        </div>
+
+        @if (place.images.length > 1) {
+          <button class="nav-btn prev" (click)="prevImage()" [disabled]="activeImageIndex === 0">‹</button>
+          <button class="nav-btn next" (click)="nextImage()" [disabled]="activeImageIndex === place.images.length - 1">›</button>
+          <span class="image-counter">{{ activeImageIndex + 1 }}&thinsp;/&thinsp;{{ place.images.length }}</span>
+        }
+      </div>
+
+      <!-- Thumbnails -->
+      @if (place.images.length > 1) {
+        <div class="thumb-strip">
+          @for (img of place.images; track $index) {
+            <button
+              class="thumb-btn"
+              [class.active]="$index === activeImageIndex"
+              (click)="setActiveImage($index)"
+            >
+              <img [src]="img" [alt]="place.name" />
+            </button>
+          }
+        </div>
+      }
+
+      <!-- Content -->
+      <div class="content-wrap">
+        <header class="place-header">
+          <h1 class="place-title">{{ place.name }}</h1>
+        </header>
+
+        <div class="content-body">
+          <!-- Description -->
+          <div class="place-body">
+            <p class="place-description">{{ place.description }}</p>
+            <a routerLink="/places" class="explore-more">← Explore more destinations</a>
+          </div>
+
+          <!-- Sidebar -->
+          <aside class="place-sidebar">
+            @if (place.mapLink) {
+              <div class="sidebar-block">
+                <p class="sidebar-label">Location</p>
+                <a [href]="place.mapLink" target="_blank" rel="noopener noreferrer" class="maps-btn">
+                  <i-feather name="map-pin" class="maps-pin"></i-feather>
+                  <span class="maps-label">Open in Google Maps</span>
+                  <i-feather name="external-link" class="maps-arrow"></i-feather>
+                </a>
+              </div>
+            }
+            <div class="sidebar-block">
+              <p class="sidebar-label">Category</p>
+              <span class="sidebar-category">{{ place.category }}</span>
+            </div>
+          </aside>
+        </div>
+      </div>
+
+    </article>
+  }
+
+  <app-footer />
+</div>

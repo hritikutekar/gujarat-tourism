@@ -1,0 +1,58 @@
+<div class="page-shell">
+<app-navbar />
+
+<div class="page-header">
+  <div class="header-inner">
+    <div class="header-eyebrow">Gujarat, India</div>
+    <h1>Explore the State</h1>
+    <div class="header-count">{{ places.length }} destination{{ places.length === 1 ? '' : 's' }} found</div>
+  </div>
+</div>
+
+<div class="filters-bar">
+  <div class="filters-inner">
+    <div class="search-input-wrap">
+      <i-feather name="search" class="search-icon"></i-feather>
+      <input
+        type="text"
+        [(ngModel)]="searchQuery"
+        (ngModelChange)="onSearchChange()"
+        placeholder="Search destinations..."
+      />
+    </div>
+    <div class="select-wrap">
+      <select [(ngModel)]="selectedCategory" (ngModelChange)="onCategoryChange()">
+        <option value="">All Categories</option>
+        @for (cat of categories.slice(1); track cat) {
+          <option [value]="cat">{{ cat }}</option>
+        }
+      </select>
+      <i-feather name="chevron-down" class="select-chevron"></i-feather>
+    </div>
+  </div>
+</div>
+
+<main class="places-container">
+  @if (loading) {
+    <div class="grid">
+      @for (i of [1,2,3,4,5,6,7,8]; track i) {
+        <div class="skeleton-card"></div>
+      }
+    </div>
+  } @else if (places.length === 0) {
+    <div class="empty-state">
+      <i-feather name="map" class="empty-icon"></i-feather>
+      <h3>No destinations found</h3>
+      <p>Try adjusting your search or filter criteria.</p>
+    </div>
+  } @else {
+    <div class="grid">
+      @for (place of places; track place._id) {
+        <app-place-card [place]="place" />
+      }
+    </div>
+  }
+</main>
+
+<app-footer />
+</div>
